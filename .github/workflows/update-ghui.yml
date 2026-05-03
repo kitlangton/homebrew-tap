@@ -29,6 +29,8 @@ jobs:
             version "${VERSION}"
             license "MIT"
 
+            depends_on "gh"
+
             on_macos do
               if Hardware::CPU.arm?
                 url "https://github.com/kitlangton/ghui/releases/download/${TAG}/ghui-darwin-arm64.tar.gz"
@@ -48,8 +50,6 @@ jobs:
                 sha256 "${LINUX_X64_SHA256}"
               end
             end
-
-            depends_on "gh"
 
             def install
               bin.install "ghui"
