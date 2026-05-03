@@ -1,0 +1,77 @@
+name: Update ghui Formula
+
+on:
+  repository_dispatch:
+    types: [ghui-release]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Update formula
+        env:
+          TAG: ${{ github.event.client_payload.tag }}
+          VERSION: ${{ github.event.client_payload.version }}
+          DARWIN_ARM64_SHA256: ${{ github.event.client_payload.darwin_arm64_sha256 }}
+          DARWIN_X64_SHA256: ${{ github.event.client_payload.darwin_x64_sha256 }}
+          LINUX_ARM64_SHA256: ${{ github.event.client_payload.linux_arm64_sha256 }}
+          LINUX_X64_SHA256: ${{ github.event.client_payload.linux_x64_sha256 }}
+        run: |
+          cat > Formula/ghui.rb <<RUBY
+          class Ghui < Formula
+            desc "Terminal UI for GitHub pull requests"
+            homepage "https://github.com/kitlangton/ghui"
+            version "${VERSION}"
+            license "MIT"
+
+            on_macos do
+              if Hardware::CPU.arm?
+                url "https://github.com/kitlangton/ghui/releases/download/${TAG}/ghui-darwin-arm64.tar.gz"
+                sha256 "${DARWIN_ARM64_SHA256}"
+              else
+                url "https://github.com/kitlangton/ghui/releases/download/${TAG}/ghui-darwin-x64.tar.gz"
+                sha256 "${DARWIN_X64_SHA256}"
+              end
+            end
+
+            on_linux do
+              if Hardware::CPU.arm?
+                url "https://github.com/kitlangton/ghui/releases/download/${TAG}/ghui-linux-arm64.tar.gz"
+                sha256 "${LINUX_ARM64_SHA256}"
+              else
+                url "https://github.com/kitlangton/ghui/releases/download/${TAG}/ghui-linux-x64.tar.gz"
+                sha256 "${LINUX_X64_SHA256}"
+              end
+            end
+
+            depends_on "gh"
+
+            def install
+              bin.install "ghui"
+            end
+
+            test do
+              assert_match version.to_s, shell_output("#{bin}/ghui --version")
+            end
+          end
+          RUBY
+
+      - name: Commit formula update
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/ghui.rb
+          if git diff --cached --quiet; then
+            echo "Formula already up to date."
+            exit 0
+          fi
+          git commit -m "Update ghui to ${VERSION}"
+          git pull --rebase
+          git push
