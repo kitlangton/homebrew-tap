@@ -80,11 +80,12 @@ jobs:
           git commit -m "Update ghui to ${VERSION}"
           if gh pr view "${branch}" --json url >/dev/null 2>&1; then
             echo "Formula update PR already exists for ${VERSION}."
-            exit 0
+          else
+            git push --set-upstream origin "${branch}"
+            gh pr create \
+              --base main \
+              --head "${branch}" \
+              --title "Update ghui to ${VERSION}" \
+              --body "Automated Homebrew formula update for kitlangton/ghui ${TAG}."
           fi
-          git push --set-upstream origin "${branch}"
-          gh pr create \
-            --base main \
-            --head "${branch}" \
-            --title "Update ghui to ${VERSION}" \
-            --body "Automated Homebrew formula update for kitlangton/ghui ${TAG}."
+          gh pr merge "${branch}" --auto --squash --delete-branch
