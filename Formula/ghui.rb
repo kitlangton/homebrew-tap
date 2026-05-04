@@ -1,28 +1,28 @@
 class Ghui < Formula
   desc "Terminal UI for GitHub pull requests"
   homepage "https://github.com/kitlangton/ghui"
-  version "0.4.7"
+  version "0.5.0"
   license "MIT"
 
   depends_on "gh"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/kitlangton/ghui/releases/download/v0.4.7/ghui-darwin-arm64.tar.gz"
-      sha256 "b65f56c6409ded853f897604f27ba189ce4a30b50947009762deee1fd662c492"
+      url "https://github.com/kitlangton/ghui/releases/download/v0.5.0/ghui-darwin-arm64.tar.gz"
+      sha256 "55e49d84488a9b0955a478cb88d79414c68cdf34726000286d7483a66172ba10"
     else
-      url "https://github.com/kitlangton/ghui/releases/download/v0.4.7/ghui-darwin-x64.tar.gz"
-      sha256 "d1ffa90328e6dab363ed875600715e99437329624390c0d9f1d02a8fb74df56f"
+      url "https://github.com/kitlangton/ghui/releases/download/v0.5.0/ghui-darwin-x64.tar.gz"
+      sha256 "cfbae4049959a1aaa271301b56862992822d4077b5ec4b491cd93fb918ecb8b6"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/kitlangton/ghui/releases/download/v0.4.7/ghui-linux-arm64.tar.gz"
-      sha256 "243e56217184e6f82dca9d9310e3abe17f66fb136caaa1ca61131d67839c5077"
+      url "https://github.com/kitlangton/ghui/releases/download/v0.5.0/ghui-linux-arm64.tar.gz"
+      sha256 "21e7164f7182164f7c23dda2370d0727d0929ffecfb18c796f5b3ef72d04671a"
     else
-      url "https://github.com/kitlangton/ghui/releases/download/v0.4.7/ghui-linux-x64.tar.gz"
-      sha256 "4c3cb665b49ec13f0d322e3967236605467c917df0a737fa7f516f019177cb4b"
+      url "https://github.com/kitlangton/ghui/releases/download/v0.5.0/ghui-linux-x64.tar.gz"
+      sha256 "2fc08b71d91d9e7ae58d1966e6885f4a2a403a72f9319eb5d48a31152257059f"
     end
   end
 
