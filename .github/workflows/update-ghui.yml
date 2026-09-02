@@ -88,4 +88,6 @@ jobs:
               --title "Update ghui to ${VERSION}" \
               --body "Automated Homebrew formula update for kitlangton/ghui ${TAG}."
           fi
-          gh pr merge "${branch}" --auto --squash --delete-branch
+          gh pr merge "${branch}" --auto --squash --delete-branch \
+            --subject "Update ghui to ${VERSION}" \
+            --body "Automated Homebrew formula update for kitlangton/ghui ${TAG}."
