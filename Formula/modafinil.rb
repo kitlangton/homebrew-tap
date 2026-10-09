@@ -1,7 +1,6 @@
 class Modafinil < Formula
   desc "Power-aware macOS keep-awake CLI"
   homepage "https://github.com/kitlangton/modafinil"
-  version "0.1.1"
   license "MIT"
 
   depends_on macos: :ventura
