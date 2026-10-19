@@ -17,6 +17,7 @@ cask "scrawl" do
   depends_on macos: :tahoe
 
   app "Scrawl.app"
+  binary "#{appdir}/Scrawl.app/Contents/MacOS/scrawl"
 
   uninstall quit: "dev.kitlangton.scrawl"
 
