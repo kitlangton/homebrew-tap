@@ -1,6 +1,6 @@
 cask "scrawl" do
-  version "0.3.8"
-  sha256 "9f5ba7883389ab20cac31f96b4cc349a899a684a2a59da33ded4b1c4ec973fd1"
+  version "0.3.9"
+  sha256 "9de5851ac3f1c062a69adc7ff8d3ef2e6190a19dcb75829ecacf6344b9dd5ba7"
 
   url "https://scrawl.kitlangton.com/releases/Scrawl-#{version}-arm64.dmg"
   name "Scrawl"
