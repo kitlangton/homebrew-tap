@@ -9,10 +9,13 @@ cask "scrawl" do
 
   livecheck do
     url "https://scrawl.kitlangton.com/appcast.xml"
-    strategy :sparkle, &:short_version
+    strategy :sparkle do |items|
+      items.select { |item| item.channel.nil? }.map(&:short_version)
+    end
   end
 
   auto_updates true
+  conflicts_with cask: "scrawl@beta"
   depends_on arch: :arm64
   depends_on macos: :sequoia
 
