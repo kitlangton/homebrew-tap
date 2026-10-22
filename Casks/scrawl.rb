@@ -1,6 +1,6 @@
 cask "scrawl" do
-  version "0.3.12"
-  sha256 "cc3564e833587409b1ee6a6594efc4d6435afb4c5c128249dd25dd79c422027a"
+  version "0.3.13"
+  sha256 "0e1bd4a183baff30c5da8aa543b7ecde808afb4e0504bdeaab8a86c3fd57b466"
 
   url "https://scrawl.kitlangton.com/releases/Scrawl-#{version}-arm64.dmg"
   name "Scrawl"
@@ -14,7 +14,7 @@ cask "scrawl" do
 
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: :tahoe
+  depends_on macos: :sequoia
 
   app "Scrawl.app"
   binary "#{appdir}/Scrawl.app/Contents/MacOS/scrawl"
