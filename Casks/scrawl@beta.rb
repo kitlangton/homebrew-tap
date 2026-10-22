@@ -9,8 +9,11 @@ cask "scrawl@beta" do
 
   livecheck do
     url "https://scrawl.kitlangton.com/appcast.xml"
+    # Builds are "0.3.14 (18)"; the cask version is "0.3.14-b18". Beta users take every build,
+    # beta or stable, so follow the newest item on any channel.
     strategy :sparkle do |items|
-      items.select { |item| item.channel == "beta" }.map(&:short_version)
+      item = items.max_by { |i| i.version.to_i }
+      "#{item.short_version}-b#{item.version}"
     end
   end
 
@@ -34,7 +37,7 @@ cask "scrawl@beta" do
   ]
 
   caveats <<~EOS
-    Enable Get beta updates in Scrawl's Settings > General to receive new betas.
+    Turn on Get beta updates in Scrawl's Settings > General to receive new betas.
     Turning it off keeps this build until a newer stable release is available.
   EOS
 end
